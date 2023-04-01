@@ -42,7 +42,6 @@ export default function SignIn() {
         const result = await signIn("credentials", { username: data.get('username'), password: data.get('password'), callbackUrl: '/', redirect: false });
         setLoading(false);
         setCredentialsError(false);
-        console.log(result)
 
         if (result.status == 200 && !result.error) router.push('/');
 

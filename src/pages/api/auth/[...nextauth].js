@@ -87,8 +87,16 @@ export const authOptions = {
         //     }
 
         // },
-        async session(session, token) {
-            if (userAccount !== null)
+        async jwt({token, user}) {
+
+            if (typeof user !== typeof undefined)
+            {
+                token.user = user;
+            }
+            return token;
+        },
+        async session({session, token}) {
+            if (userAccount && userAccount !== null)
             {
                 session.user = userAccount;
             }
@@ -103,13 +111,6 @@ export const authOptions = {
             }
             return session;
         },
-        async jwt(token, user) {
-            if (typeof user !== typeof undefined)
-            {
-                token.user = user;
-            }
-            return token;
-        }
     }
 }
 export default NextAuth(authOptions)

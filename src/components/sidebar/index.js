@@ -6,7 +6,6 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
@@ -16,6 +15,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import DeliveryDiningOutlinedIcon from '@mui/icons-material/DeliveryDiningOutlined';
 import { useSession } from "next-auth/react"
 import Image from "next/image";
 
@@ -101,6 +101,7 @@ const Sidebar = () => {
                   height="100"
                   src="/user-3.jpg"
                   style={{ cursor: "pointer", borderRadius: "50%" }}
+                  priority={true}
                 />
               </Box>
               <Box textAlign="center">
@@ -137,22 +138,22 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Orders"
-              to="/team"
-              icon={<PeopleOutlinedIcon />}
+              to="/orders"
+              icon={<DeliveryDiningOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+              />
             <Item
               title="Inventory details"
-              to="/contacts"
-              icon={<ContactsOutlinedIcon />}
+              to="/inventory"
+              icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+              />
             <Item
               title="customers"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
+              to="/customers"
+              icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -162,10 +163,10 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Pages
+              Users
             </Typography>
             <Item
-              title="Profile Form"
+              title="Manage Users"
               to="#"
               icon={<PersonOutlinedIcon />}
               selected={selected}

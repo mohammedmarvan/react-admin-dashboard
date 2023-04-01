@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ColorModeContext, useMode } from "../../theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import Topbar from "../header";
+import Topbar from "../topbar";
 import Sidebar from "../sidebar";
 
 const Layout = ( children ) => {

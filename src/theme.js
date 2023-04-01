@@ -1,4 +1,4 @@
-import { createContext, useState, useMemo } from "react";
+import { createContext, useState, useMemo, useEffect } from "react";
 import { createTheme } from "@mui/material/styles";
 
 // color design tokens export
@@ -198,15 +198,34 @@ export const ColorModeContext = createContext({
   toggleColorMode: () => {},
 });
 
+const updateThemeInStorage = (theme) => {
+    try {
+        console.log("calling this function  === ",theme)
+        window.localStorage.setItem('selected_theme', theme);
+        return true;
+    }catch(e) {
+        return false;
+    }
+}
+
 export const useMode = () => {
   const [mode, setMode] = useState("dark");
 
+  // There is warning with this usage
+  useEffect(() => {
+    if (localStorage.getItem('selected_theme')) {
+        setMode(localStorage.getItem('selected_theme'))
+    }
+  }, [mode])
+
   const colorMode = useMemo(
     () => ({
-      toggleColorMode: () =>
-        setMode((prev) => (prev === "light" ? "dark" : "light")),
+      toggleColorMode: () => {
+        setMode((prev) => (prev === "light" ? "dark" : "light"))
+        updateThemeInStorage(mode === "light" ? "dark" : "light")
+      }
     }),
-    []
+    [mode]
   );
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
