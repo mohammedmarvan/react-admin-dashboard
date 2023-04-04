@@ -1,5 +1,5 @@
 <p align="center">
-    <h1 align="center">Nextjs Admin Dashbaord Intergrated Using Knexjs And SQL</h1>
+    <h1 align="center">Nextjs Admin Dashbaord Using MUI Intergrated Using Knexjs And SQL</h1>
     <div align="center">
         <img src="./website-images/website-screenshot-1.png" width="45%" title="website veiw light mode">
         <img src="./website-images/website-screenshot-2.png" width="45%" title="website view order page">
