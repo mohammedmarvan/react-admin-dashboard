@@ -1,4 +1,6 @@
-## Nextjs Admin Dashbaord Intergrated Using Knexjs And SQL
+<p align="center">
+    <h1 align="center">Nextjs Admin Dashbaord Intergrated Using Knexjs And SQL</h1>
+</p>
 
 ## Special thanks
 
