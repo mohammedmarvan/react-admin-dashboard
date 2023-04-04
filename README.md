@@ -1,12 +1,12 @@
 <p align="center">
     <h1 align="center">Nextjs Admin Dashbaord Intergrated Using Knexjs And SQL</h1>
-    <div>
-        <img src="./website-images/website-screenshot-1.png" width="40%" title="hover text">
-        <img src="./website-images/website-screenshot-2.png" width="40%" title="hover text">
+    <div style="display:flex; align-items:center;">
+        <img src="./website-images/website-screenshot-1.png" width="40%" title="website veiw light mode">
+        <img src="./website-images/website-screenshot-2.png" width="40%" title="website view order page">
     </div>
     <div>
-        <img src="./website-images/website-screenshot-3.png" width="40%" title="hover text">
-        <img src="./website-images/website-screenshot-4.png" width="40%" title="hover text">
+        <img src="./website-images/website-screenshot-3.png" width="40%" title="website view dark mode">
+        <img src="./website-images/website-screenshot-4.png" width="40%" title="website view icon click">
     </div>
 </p>
 
@@ -44,5 +44,9 @@ yarn dev
 # or
 pnpm dev
 ```
+
+5. Create a user entry in the users table(password should be md5(password))
+
+6. Use the credentials to login to the website 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
