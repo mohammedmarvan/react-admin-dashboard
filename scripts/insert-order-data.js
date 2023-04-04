@@ -3,7 +3,8 @@ const getGrandTotal = () => {
 }
 
 const getRandomCustomerId = () => {
-    return Math.floor(Math.random() * 5000);
+    let random = Math.floor(Math.random() * 5000);
+    return random > 0 ? random : 1;
 }
 
 const getRefId = (length = 9) => {
@@ -40,7 +41,7 @@ async function main() {
             var customerId = getRandomCustomerId();
             var status = getRandomStatus();
             await getKnex.insert({ referId, customerId, status, grandTotal })
-        },2000)
+        },12000)
 
         // for(var i = 0; i < 1000; i++) {
         //     var grandTotal = getGrandTotal();

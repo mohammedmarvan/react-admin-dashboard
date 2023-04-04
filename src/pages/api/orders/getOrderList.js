@@ -1,11 +1,12 @@
-const { getDashboardData, getHourlyDataForChartForTheDay } = require('../../../db/orders');
+const { getOrderListForUI } = require('../../../db/orders');
 
 export default async function handler (req, res) {
 
     try {
-        const dbData = await getDashboardData();
-        const chartData = await getHourlyDataForChartForTheDay();
-        dbData.chartData = chartData;
+
+        const { sortModel, paginationModel } = req.body;
+
+        const dbData = await getOrderListForUI( sortModel, paginationModel );
     
         res.status(200).json({
             status: 'success', 

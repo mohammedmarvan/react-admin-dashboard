@@ -15,15 +15,19 @@
     "@mui/lab": "^5.0.0-alpha.124",
     "@mui/material": "^5.11.15",
     "@mui/x-data-grid": "^6.0.3",
+    "@nivo/line": "^0.80.0",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
     "knex": "^2.4.2",
+    "knex-paginate": "^3.1.0",
     "md5": "^2.3.0",
+    "moment": "^2.29.4",
     "mysql": "^2.18.1",
     "next": "13.2.4",
     "next-auth": "^4.20.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-pro-sidebar": "^0.7.1"
+    "react-pro-sidebar": "^0.7.1",
+    "react-text-transition": "^3.0.2"
   }
 }

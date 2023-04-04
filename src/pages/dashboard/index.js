@@ -1,14 +1,17 @@
-import { Box, Button, useTheme } from "@mui/material";
+import { Box, Button, useTheme, Typography, IconButton } from "@mui/material";
 import { tokens } from "../../theme";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "@/components/header";
 import StatBox from "@/components/statbox";
+import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 // import ProgressCircle from "@/components/progress-circle";
 import { useState, useEffect } from "react";
+import LineChart from "@/components/line-chart";
+import React                       from "react";
+import TextTransition, { presets } from "react-text-transition";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -19,20 +22,33 @@ const Dashboard = () => {
   const [scheduledOrderPercentage, setScheduledOrderPercentage] = useState(0);
   const [shippedOrders, setShippedOrders] = useState(0);
   const [shippedOrderPecentage, setShippedOrderPercentage] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [orderLineChartData, setOrderLineChartData] = useState([]);
+  const [totalOrderUp, setTotalOrderUp] = useState(1);
+  const [isMounted, setIsMounted] = useState(false);
+  const [expressOderUp, setExpressOrderUp] = useState(1);
+  const [scheduledOrderUp, setSheduledOrdersUp] = useState(1);
+  const [shippedOrderUp, setShippedOrderUp] = useState(1);
 
   const getExpressOrderPercentage = (expressO, totalO) => {
+    if (expressO <= 0 || totalO <= 0) return 0;
+
     if (isNaN(expressO) || isNaN(totalO)) return 0;
 
     return (expressO/totalO);
   }
 
   const getScheduledOrderPercentage = (scheduledO, total0) => {
+    if (scheduledO <= 0 || total0 <= 0) return 0;
+
     if (isNaN(scheduledO) || isNaN(total0)) return 0;
 
     return (scheduledO/total0);
   }
 
   const getShippedOrderPercentage = (shippedO, total0) => {
+    if (shippedO <= 0 || total0 <= 0) return 0;
+
     if (isNaN(shippedO) || isNaN(total0)) return 0;
 
     return (shippedO/total0);
@@ -40,34 +56,64 @@ const Dashboard = () => {
 
   const fetchDashBoardData = async() => {
     const response = await fetch('/api/dashboard/getDashboardData')
-    const data = await response.json()
-    if (data && data.status == 'success') {
-      updateDashBoardData(data.data);
+    
+    if (response.ok) {
+      const data = await response.json()
+  
+      if (data && data.status == 'success') {
+        updateDashBoardData(data.data);
+      }
     }
   }
 
   const updateDashBoardData = (data) => {
+
+    if (expressOrders < data.pendingExpressOrders) {
+      setExpressOrderUp(1);
+    }else {
+      setExpressOrderUp(0);
+    }
+
+    if (totalOrders < data.totalOrders) {
+      setTotalOrderUp(1);
+    }else {
+      setTotalOrderUp(0);
+    }
+
+    if (scheduledOrders < data.pendingScheduledOrders) {
+      setSheduledOrdersUp(1);
+    }else {
+      setSheduledOrdersUp(0);
+    }
+
+    if (shippedOrders < data.dispatchedOrders) {
+      setShippedOrderUp(1);
+    }else {
+      setShippedOrderUp(0);
+    }
+
     setExpressOrders(data.pendingExpressOrders);
     setScheduledOrders(data.pendingScheduledOrders);
     setShippedOrders(data.dispatchedOrders);
     setExpressOrderPercentage(getExpressOrderPercentage(data.pendingExpressOrders, data.totalOrders));
     setScheduledOrderPercentage(getScheduledOrderPercentage(data.pendingScheduledOrders, data.totalOrders));
     setShippedOrderPercentage(getShippedOrderPercentage(data.dispatchedOrders, data.totalOrders));
+    setTotalOrders(data.totalOrders);
+    setOrderLineChartData(data.chartData);
   }
 
   useEffect(() => {
-
-    async function initialFetch() {
-      await fetchDashBoardData();
+  
+    if (!isMounted) {
+      fetchDashBoardData();
+      setIsMounted(true);
     }
-
-    initialFetch();
     
     const fetchInterval = setInterval(async() => {
       await fetchDashBoardData();
     }, 10000)
     return () => clearInterval(fetchInterval);
-  })
+  }, [])
 
   return (
     <Box m="20px">
@@ -107,12 +153,17 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title={expressOrders.toLocaleString('en-US')}
+            // title={expressOrders.toLocaleString('en-US')}
+            title={
+              <TextTransition springConfig={presets.slow} direction={expressOderUp ? "up" : "down"}>
+                {expressOrders.toLocaleString('en-US')}
+              </TextTransition>
+            }
             subtitle="Express Orders"
             progress={expressOrderPercentage}
             increase={(expressOrderPercentage * 100).toFixed(2) + '%'}
             icon={
-              <EmailIcon
+              <DirectionsBikeIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -126,12 +177,17 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title={scheduledOrders.toLocaleString('en-US')}
+            // title={scheduledOrders.toLocaleString('en-US')}
+            title={
+              <TextTransition springConfig={presets.slow} direction={scheduledOrderUp ? "up" : "down"}>
+                {scheduledOrders.toLocaleString('en-US')}
+              </TextTransition>
+            }
             subtitle="Scheduled Orders"
             progress={scheduledOrderPercentage}
             increase={(scheduledOrderPercentage * 100).toFixed(2) + '%'}
             icon={
-              <PointOfSaleIcon
+              <AccessAlarmIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -145,12 +201,17 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title={shippedOrders.toLocaleString('en-US')}
+            // title={shippedOrders.toLocaleString('en-US')}
+            title={
+              <TextTransition springConfig={presets.slow} direction={shippedOrderUp ? "up" : "down"}>
+                {shippedOrders.toLocaleString('en-US')}
+              </TextTransition>
+            }
             subtitle="Shipped Orders"
             progress={shippedOrderPecentage}
             increase={(shippedOrderPecentage * 100 ).toFixed(2) + '%'}
             icon={
-              <PersonAddIcon
+              <LocalShippingIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -177,9 +238,9 @@ const Dashboard = () => {
         </Box>
 
         {/* ROW 2 */}
-        {/* <Box
-          gridColumn="span 8"
-          gridRow="span 2"
+        <Box
+          gridColumn="span 12"
+          gridRow="span 4"
           backgroundColor={colors.primary[400]}
         >
           <Box
@@ -195,14 +256,16 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Revenue Generated
+                HOURLY ORDER COUNT
               </Typography>
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+                <TextTransition springConfig={presets.slow} direction={totalOrderUp ? "up" : "down"}>
+                  {totalOrders.toLocaleString('en-US')}
+                </TextTransition>
               </Typography>
             </Box>
             <Box>
@@ -213,11 +276,11 @@ const Dashboard = () => {
               </IconButton>
             </Box>
           </Box>
-          <Box height="250px" m="-20px 0 0 0">
-            <LineChart isDashboard={true} />
+          <Box height="500px" m="-20px 0 0 0">
+            <LineChart isDashboard={true} chartData={orderLineChartData} />
           </Box>
         </Box>
-        <Box
+        {/* <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}

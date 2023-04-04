@@ -200,7 +200,6 @@ export const ColorModeContext = createContext({
 
 const updateThemeInStorage = (theme) => {
     try {
-        console.log("calling this function  === ",theme)
         window.localStorage.setItem('selected_theme', theme);
         return true;
     }catch(e) {
