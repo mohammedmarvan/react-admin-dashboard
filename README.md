@@ -1,10 +1,10 @@
 <p align="center">
     <h1 align="center">Nextjs Admin Dashbaord Intergrated Using Knexjs And SQL</h1>
-    <div style="display:flex; align-items:center;">
+    <div align="center">
         <img src="./website-images/website-screenshot-1.png" width="40%" title="website veiw light mode">
         <img src="./website-images/website-screenshot-2.png" width="40%" title="website view order page">
     </div>
-    <div>
+    <div align="center">
         <img src="./website-images/website-screenshot-3.png" width="40%" title="website view dark mode">
         <img src="./website-images/website-screenshot-4.png" width="40%" title="website view icon click">
     </div>
