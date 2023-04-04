@@ -1,12 +1,12 @@
 <p align="center">
     <h1 align="center">Nextjs Admin Dashbaord Intergrated Using Knexjs And SQL</h1>
     <div>
-        <img src="./website-images/website-screenshot-1.png" width="50%" title="hover text">
-        <img src="./website-images/website-screenshot-2.png" width="50%" title="hover text">
+        <img src="./website-images/website-screenshot-1.png" width="40%" title="hover text">
+        <img src="./website-images/website-screenshot-2.png" width="40%" title="hover text">
     </div>
     <div>
-        <img src="./website-images/website-screenshot-3.png" width="50%" title="hover text">
-        <img src="./website-images/website-screenshot-4.png" width="50%" title="hover text">
+        <img src="./website-images/website-screenshot-3.png" width="40%" title="hover text">
+        <img src="./website-images/website-screenshot-4.png" width="40%" title="hover text">
     </div>
 </p>
 
