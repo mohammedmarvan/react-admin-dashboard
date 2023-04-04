@@ -2,6 +2,8 @@
     <h1 align="center">Nextjs Admin Dashbaord Intergrated Using Knexjs And SQL</h1>
 </p>
 
+![screenshot](./public/Screenshot from 2023-04-04 20-29-03.png?raw=true)
+
 ## Special thanks
 
 Thanks to EdRoh(@EdRohDev - youtube - https://youtu.be/wYpCWwD1oz0?list=PLIrDdeM009ItCBwCZK8K8JtXfIR9FPbm3) for the wonderfull admin design.
