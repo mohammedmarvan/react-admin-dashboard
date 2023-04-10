@@ -35,7 +35,17 @@ DB_USER=
 DB_PASS=
 ```
 
-4. Run the development server:
+4. Install knex CLI(`npm install -g knex`)
+
+5. Run knex migrations
+
+```
+knex migrate:latest
+```
+
+6. Create a user entry in the users table(password should be md5(password))
+
+7. Run the development server:
 
 ```bash
 npm run dev
@@ -45,8 +55,6 @@ yarn dev
 pnpm dev
 ```
 
-5. Create a user entry in the users table(password should be md5(password))
-
-6. Use the credentials to login to the website 
+8. Use the user(step 6) credentials to login to the website 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
