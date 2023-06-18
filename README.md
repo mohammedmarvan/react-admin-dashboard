@@ -1,5 +1,5 @@
 <p align="center">
-    <h1 align="center">Nextjs Admin Dashbaord Using MUI Intergrated Using Knexjs And SQL</h1>
+    <h1 align="center">Nextjs Admin Dashboard Using MUI Included Database Functionality Using Knexjs and MySQL</h1>
     <div align="center">
         <img src="./website-images/website-screenshot-1.png" width="45%" title="website veiw light mode">
         <img src="./website-images/website-screenshot-2.png" width="45%" title="website view order page">
@@ -18,14 +18,14 @@ Thanks to EdRoh(@EdRohDev - youtube - https://youtu.be/wYpCWwD1oz0?list=PLIrDdeM
 
 1. Download the repo
 
-2. Install depencies
+2. Install dependencies
 
 ```bash
 npm i
 #or
 yarn install
 ```
-3. Create .env file and update .env file with below details
+3. Create a .env file and update the .env file with the below details
 
 ```bash
 DB_HOST=
